@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All Soccer IO</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #2b2727;
+      }
+      th {
+        background-color: #3271d0;
+        color: rgb(0, 0, 0);
+      }
+      tr:hover {
+        background-color: #000000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Upcoming USWNT Matches</h1>
+    <select id="matches-dropdown">
+      <option value="select">Select a team</option>
+      <option value="uswnt">USWNT</option>
+    </select>
+    <table id="matches-table" style="display: none;">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Opponent</th>
+          <th>Location</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <script>
+      const matches = [
+        {
+          date: 'May 10, 2023',
+          opponent: 'Canada',
+          location: 'Empower Field at Mile High, Denver, CO',
+          time: '7:00 PM ET'
+        },
+        {
+          date: 'May 13, 2023',
+          opponent: 'Mexico',
+          location: 'Red Bull Arena, Harrison, NJ',
+          time: '7:00 PM ET'
+        },
+        {
+          date: 'May 17, 2023',
+          opponent: 'Costa Rica',
+          location: 'Banc of California Stadium, Los Angeles, CA',
+          time: '7:00 PM PT'
+        }
+      ];
+
+      const select = document.getElementById('matches-dropdown');
+      const table = document.getElementById('matches-table');
+
+      select.addEventListener('change', () => {
+        if (select.value === 'uswnt') {
+          table.style.display = 'table';
+
+          // Remove existing table rows
+          const rows = table.querySelectorAll('tbody tr');
+          rows.forEach(row => row.remove());
+
+          // Generate table rows for each match
+          matches.forEach(match => {
+            const row = document.createElement('tr');
+            const dateCell = document.createElement('td');
+            dateCell.textContent = match.date;
+            row.appendChild(dateCell);
+            const opponentCell = document.createElement('td');
+            opponentCell.textContent = match.opponent;
+            row.appendChild(opponentCell);
+            const locationCell = document.createElement('td');
+            locationCell.textContent = match.location;
+            row.appendChild(locationCell);
+            const timeCell = document.createElement('td');
+            timeCell.textContent = match.time;
+            row.appendChild(timeCell);
+            table.querySelector('tbody').appendChild(row);
+          });
+        } else {
+          table.style.display = 'none';
+        }
+      });
+    </script>
+  </body>
+</html>
