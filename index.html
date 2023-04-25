@@ -5,96 +5,89 @@
     <style>
       body {
         font-family: Arial, sans-serif;
+        background-color: #1c1c1c;
+        color: #fff;
+        display: flex;
+        justify-content: center;
       }
-      table {
-        border-collapse: collapse;
-        width: 100%;
+      h1 {
+        font-size: 3rem;
+        text-align: center;
+        margin-top: 3rem;
       }
-      th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #2b2727;
+      #content {
+        text-align: center;
       }
-      th {
-        background-color: #3271d0;
-        color: rgb(0, 0, 0);
+      select, button {
+        margin-top: 20px;
+        font-size: 18px;
+        padding: 10px;
+        background-color: #0f3a58;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-align: center;
       }
-      tr:hover {
-        background-color: #000000;
+      option {
+        background-color: #444;
+        color: #fff;
+      }
+      
+      button:hover {
+        background-color: #2a64b3;
+      }
+      select:focus, button:focus {
+        outline: none;
       }
     </style>
   </head>
   <body>
-    <h1>Upcoming USWNT Matches</h1>
-    <select id="matches-dropdown">
-      <option value="select">Select a team</option>
-      <option value="uswnt">USWNT</option>
-    </select>
-    <table id="matches-table" style="display: none;">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Opponent</th>
-          <th>Location</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <div id="content">
+      <h1>All Soccer</h1>
+      <select id="matches-dropdown">
+        <option value="select">Select a team</option>
+        <option value="uswnt">U.S. Soccer Matches</option>
+        <option value="mls">MLS Matches</option>
+        <option value="angelcity">Angel City FC Matches</option>
+      </select>
+      <br>
+      <br>
+      <button id="matches-link" style="display: none;">View all matches</button>
+    </div>
 
     <script>
-      const matches = [
-        {
-          date: 'May 10, 2023',
-          opponent: 'Canada',
-          location: 'Empower Field at Mile High, Denver, CO',
-          time: '7:00 PM ET'
-        },
-        {
-          date: 'May 13, 2023',
-          opponent: 'Mexico',
-          location: 'Red Bull Arena, Harrison, NJ',
-          time: '7:00 PM ET'
-        },
-        {
-          date: 'May 17, 2023',
-          opponent: 'Costa Rica',
-          location: 'Banc of California Stadium, Los Angeles, CA',
-          time: '7:00 PM PT'
-        }
-      ];
-
       const select = document.getElementById('matches-dropdown');
-      const table = document.getElementById('matches-table');
+      const link = document.getElementById('matches-link');
+      let currentLink = '';
+
+      function handleClick() {
+        if (currentLink) {
+          window.open(currentLink, '_blank');
+        }
+      }
 
       select.addEventListener('change', () => {
         if (select.value === 'uswnt') {
-          table.style.display = 'table';
-
-          // Remove existing table rows
-          const rows = table.querySelectorAll('tbody tr');
-          rows.forEach(row => row.remove());
-
-          // Generate table rows for each match
-          matches.forEach(match => {
-            const row = document.createElement('tr');
-            const dateCell = document.createElement('td');
-            dateCell.textContent = match.date;
-            row.appendChild(dateCell);
-            const opponentCell = document.createElement('td');
-            opponentCell.textContent = match.opponent;
-            row.appendChild(opponentCell);
-            const locationCell = document.createElement('td');
-            locationCell.textContent = match.location;
-            row.appendChild(locationCell);
-            const timeCell = document.createElement('td');
-            timeCell.textContent = match.time;
-            row.appendChild(timeCell);
-            table.querySelector('tbody').appendChild(row);
-          });
+          link.style.display = 'inline-block';
+          link.removeEventListener('click', handleClick);
+          link.addEventListener('click', handleClick);
+          currentLink = 'https://www.stanza.co/@ussoccer';
+        } else if (select.value === 'mls') {
+          link.style.display = 'inline-block';
+          link.removeEventListener('click', handleClick);
+          link.addEventListener('click', handleClick);
+          currentLink = 'https://www.stanza.co/timeline/mls-allevents';
+        } else if (select.value === 'angelcity') {
+          link.style.display = 'inline-block';
+          link.removeEventListener('click', handleClick);
+          link.addEventListener('click', handleClick);
+          currentLink = 'https://www.stanza.co/timeline/nwsl-angelcity';
         } else {
-          table.style.display = 'none';
+          link.style.display = 'none';
+          link.removeEventListener('click', handleClick);
+          currentLink = '';
         }
       });
     </script>
