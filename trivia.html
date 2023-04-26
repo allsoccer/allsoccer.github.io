@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Soccer Trivia Game</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1c1c1c;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 3rem;
+        text-align: center;
+        margin-top: 3rem;
+      }
+      #content {
+        text-align: center;
+      }
+      button {
+        margin-top: 20px;
+        font-size: 18px;
+        padding: 10px;
+        background-color: #0f3a58;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-align: center;
+      }
+      button:hover {
+        background-color: #2a64b3;
+      }
+      button:focus {
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Soccer Trivia Game</h1>
+      <p id="question"></p>
+      <button id="option1"></button>
+      <button id="option2"></button>
+      <button id="option3"></button>
+      <button id="option4"></button>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          question: "Which country won the 2018 FIFA World Cup?",
+          options: ["Argentina", "Brazil", "France", "Germany"],
+          answer: "France"
+        },
+        {
+          question: "Which player has won the Ballon d'Or the most times?",
+          options: ["Lionel Messi", "Cristiano Ronaldo", "Neymar", "Ronaldinho"],
+          answer: "Lionel Messi"
+        },
+        {
+          question: "Which team has won the most UEFA Champions League titles?",
+          options: ["Barcelona", "Bayern Munich", "Liverpool", "Real Madrid"],
+          answer: "Real Madrid"
+        },
+        {
+          question: "Who is the all-time top scorer in the English Premier League?",
+          options: ["Alan Shearer", "Cristiano Ronaldo", "Lionel Messi", "Thierry Henry"],
+          answer: "Alan Shearer"
+        },
+        {
+          question: "Which country has won the most Copa America titles?",
+          options: ["Argentina", "Brazil", "Chile", "Uruguay"],
+          answer: "Uruguay"
+        }
+      ];
+
+      const questionElement = document.getElementById("question");
+      const option1Element = document.getElementById("option1");
+      const option2Element = document.getElementById("option2");
+      const option3Element = document.getElementById("option3");
+      const option4Element = document.getElementById("option4");
+
+      let currentQuestion = 0;
+      let score = 0;
+
+      function showQuestion() {
+        const question = questions[currentQuestion];
+        questionElement.textContent = question.question;
+        option1Element.textContent = question.options[0];
+        option2Element.textContent = question.options[1];
+        option3Element.textContent = question.options[2];
+        option4Element.textContent = question.options[3];
+      }
+
+      function checkAnswer(event) {
+        const selectedOption = event.target.textContent;
+        const question = questions[currentQuestion];
+        if (selectedOption === question.answer) {
+            score++;
+        }
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        }
+        }
+        showQuestion();
+        </script> 
+        </body>
+</html>

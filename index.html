@@ -2,50 +2,19 @@
 <html>
   <head>
     <title>All Soccer IO</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #1c1c1c;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-      }
-      h1 {
-        font-size: 3rem;
-        text-align: center;
-        margin-top: 3rem;
-      }
-      #content {
-        text-align: center;
-      }
-      select, button {
-        margin-top: 20px;
-        font-size: 18px;
-        padding: 10px;
-        background-color: #0f3a58;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        text-align: center;
-      }
-      option {
-        background-color: #444;
-        color: #fff;
-      }
-      
-      button:hover {
-        background-color: #2a64b3;
-      }
-      select:focus, button:focus {
-        outline: none;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <header>
+      <div class="header">
+        <h1 class="header-title">All Soccer</h1>
+        <div>
+          <a href="#" class="header-btn">Link 1</a>
+          <a href="#" class="header-btn">Link 2</a>
+        </div>
+      </div>
+    </header>
     <div id="content">
-      <h1>All Soccer</h1>
       <select id="matches-dropdown">
         <option value="select">Select a team</option>
         <option value="uswnt">U.S. Soccer Matches</option>
@@ -55,41 +24,11 @@
       <br>
       <br>
       <button id="matches-link" style="display: none;">View all matches</button>
+      <br>
+      <br>
+      <button id="trivia-link">Play Soccer Trivia!</button>
     </div>
 
-    <script>
-      const select = document.getElementById('matches-dropdown');
-      const link = document.getElementById('matches-link');
-      let currentLink = '';
-
-      function handleClick() {
-        if (currentLink) {
-          window.open(currentLink, '_blank');
-        }
-      }
-
-      select.addEventListener('change', () => {
-        if (select.value === 'uswnt') {
-          link.style.display = 'inline-block';
-          link.removeEventListener('click', handleClick);
-          link.addEventListener('click', handleClick);
-          currentLink = 'https://www.stanza.co/@ussoccer';
-        } else if (select.value === 'mls') {
-          link.style.display = 'inline-block';
-          link.removeEventListener('click', handleClick);
-          link.addEventListener('click', handleClick);
-          currentLink = 'https://www.stanza.co/timeline/mls-allevents';
-        } else if (select.value === 'angelcity') {
-          link.style.display = 'inline-block';
-          link.removeEventListener('click', handleClick);
-          link.addEventListener('click', handleClick);
-          currentLink = 'https://www.stanza.co/timeline/nwsl-angelcity';
-        } else {
-          link.style.display = 'none';
-          link.removeEventListener('click', handleClick);
-          currentLink = '';
-        }
-      });
-    </script>
+    <script src="main.js"></script>
   </body>
 </html>
